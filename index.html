@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8 na">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Homepage</title>
+ <link rel="stylesheet" href="HomePage/HomePage.css">
+</head>
+
+<body>
+ <header>
+  <div>
+   <img src="../IMAGE/mistlogo.png" alt="">
+   <h3>MIST</h3>
+  </div>
+
+  <nav>
+   
+ <a href="../loginForm/LOGIN.html" class="login">LOGIN</a>
+
+  </nav>
+  
+ </header>
+ <div class="carousel">
+
+  <div class="list">
+
+   <div class="item">
+
+    <img src="../IMAGE/f683a78da4c31d9e0db35612aa652da3.jpg" alt="#">
+
+    <div class="content">
+
+     <div class="author">LIBRARY HOLDING
+</div>
+     <div class="title">MIST LIBRARY</div>
+     <div class="des">"A library is not a luxury but one of the necessities of life." <br>- Henry Ward Beecher </div>
+
+     <div class="buttons">
+      <button><a href="../Library Data Collections/BookAndJournalsData.html">Library Collections</a></button>
+     </div>
+
+    </div>
+
+   </div>
+
+   <div class="item">
+
+    <img src="../IMAGE/peak.jpg" alt="#">
+
+    <div class="content">
+
+     <div class="author">LIBRARY HOLDING</div>
+     <div class="title">MIST LIBRARY</div>
+     <div class="des">"The only thing that you absolutely have to know, is the location of the library." <br>- Albert Ainstein </div>
+
+<div class="buttons">
+      <button><a href="../Library Data Collections/BookAndJournalsData.html">Library Collections</a></button>
+     </div>
+
+    </div>
+
+   </div>
+
+   <div class="item">
+
+    <img src="../IMAGE/989b4d4a9d8a93124d304a730e3b5739.jpg" alt="#">
+
+    <div class="content">
+
+     <div class="author">LIBRARY HOLDING</div>
+     <div class="title">MIST LIBRARY</div>
+     <div class="des">"Librarians have always been among the most thoughtful and helpful people. They are teachers without a classroom." <br>- Willard Scott </div>
+
+<div class="buttons">
+      <button><a href="../Library Data Collections/BookAndJournalsData.html">Library Collections</a></button>
+     </div>
+
+    </div>
+
+   </div>
+
+   <div class="item">
+
+    <img src="../IMAGE/peakpxx.jpg" alt="#">
+
+    <div class="content">
+
+     <div class="author">LIBRARY HOLDING</div>
+     <div class="title">MIST LIBRARY</div>
+     <div class="des">"I have always imagined that Paradise will be a kind of library." <br>- Jorge Luis Borgas </div>
+
+<div class="buttons">
+      <button><a href="../Library Data Collections/BookAndJournalsData.html">Library Collections</a></button>
+     </div>
+
+    </div>
+
+   </div>
+
+  </div>
+
+  <!--thumbnail-->
+  <div class="thumbnail">
+
+   <div class="item">
+
+    <img src="../IMAGE/peak.jpg" alt="#">
+    <div class="content">
+     <button style="border: none; color: white; border-radius: 5px; background-color: transparent; margin-left: -7px;"><a href="bsis.html"></a></button>
+     <div class="des"></div>
+    </div>
+
+   </div>
+   <div class="item">
+    <img src="../IMAGE/989b4d4a9d8a93124d304a730e3b5739.jpg" alt="#">
+    <div class="content">
+     <div class="title"></div>
+     <div class="des"></div>
+    </div>
+
+   </div>
+   <div class="item">
+    <img src="../IMAGE/peakpxx.jpg" alt="#">
+    <div class="content">
+     <div class="title"></div>
+     <div class="des"></div>
+    </div>
+
+   </div>
+   <div class="item">
+    <img src="../IMAGE/f683a78da4c31d9e0db35612aa652da3.jpg" alt="#">
+    <div class="content">
+     <div class="title"></div>
+     <div class="des"></div>
+    </div>
+
+   </div>
+
+  </div>
+
+  <!--arrows-->
+
+  <div class="arrows">
+   <button id="prev" type="button">&lt;</button>
+   <button id="next" type="button">></button>
+  </div>
+
+  <div class="time"></div>
+
+ </div>
+
+</body>
+
+<script src="HomePage/HomePage.js"></script>
+
+<script type="module">
+     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    
+     const firebaseConfig = {
+       apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
+       authDomain: "final-library-holding.firebaseapp.com",
+       databaseURL: "https://final-library-holding-default-rtdb.firebaseio.com",
+       projectId: "final-library-holding",
+       storageBucket: "final-library-holding.firebasestorage.app",
+       messagingSenderId: "1039508541227",
+       appId: "1:1039508541227:web:fa6a415302333ec47e7f6e"
+     };
+
+     const app = initializeApp(firebaseConfig);
+   </script>
+
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journals Holding</title> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./CSS/JournalHoldings.css">
+</head>
+<body>
+<i class="fas fa-bars" id="menu"></i>
+<div class="for" id="for">
+    <i class="fas fa-leaf"></i>
+    <i class="fas fa-leaf"></i>
+    <i class="fas fa-leaf"></i>
+    <i class="fas fa-leaf"></i>
+    <label for="programs">Programs</label>
+    <div class="programs">
+        <label><input type="checkbox" name="course" value="BSIS"> BSIS</label>
+        <label><input type="checkbox" name="course" value="CRIM"> CRIM</label>
+        <label><input type="checkbox" name="course" value="INTREP"> ENTREPRENEUR</label>
+        <label><input type="checkbox" name="course" value="AGRICULTURE"> AGRICULTURE</label>
+        <label><input type="checkbox" name="course" value="BPA"> BPA</label>
+        <label><input type="checkbox" name="course" value="MIDWIFERY"> MIDWIFERY</label>
+        <label><input type="checkbox" name="course" value="GENERAL ACADEMIC"> GENERAL ACADEMIC</label>
+    </div>
+
+    <label>Program Year</label>
+    <select id="Year" title="Year" required>
+        <option value="1st Yr - 1st Sem">1st Yr - 1st Sem</option>
+        <option value="1st Yr - 2nd Sem">1st Yr - 2nd Sem</option>
+        <option value="2nd Yr - 1st Sem">2nd Yr - 1st Sem</option>
+        <option value="2nd Yr - 2nd Sem">2nd Yr - 2nd Sem</option>
+        <option value="3rd Yr - 1st Sem">3rd Yr - 1st Sem</option>
+        <option value="3rd Yr - 2nd Sem">3rd Yr - 2nd Sem</option>
+        <option value="4th Yr - 1st Sem">4th Yr - 1st Sem</option>
+        <option value="4th Yr - 2nd Sem">4th Yr - 2nd Sem</option>
+    </select>
+
+    <label>Subject</label>
+    <select id="Subject" title="Subject" required>
+        <option value="IS104 - Systems Analysis & Design">IS104 - Systems Analysis & Design</option>
+        <option value="DM101 - Organization and Management Concepts">DM101 - Organization and Management Concepts</option>
+        <option value="CC101 - Introduction to Computing">CC101 - Introduction to Computing</option>
+        <option value="CC102 - Computer Programming 1">CC102 - Computer Programming 1</option>
+        <option value="CHF - Computer Hardware Fundamentals">CHF - Computer Hardware Fundamentals</option>
+        <option value="IS101 - Fundamentals of Information Systems">IS101 - Fundamentals of Information Systems</option>
+        <option value="CC103 - Computer Programming 2">CC103 - Computer Programming 2</option>
+        <option value="WEBDEV - Web Development">WEBDEV - Web Development</option>
+        <option value="CC104 - Data Structures and Algorithms">CC104 - Data Structures and Algorithms</option>
+        <option value="IS102 - Professional Issues in Information Systems">IS102 - Professional Issues in Information Systems</option>
+        <option value="IS103 - IT Infrastructure and Network Technologies">IS103 - IT Infrastructure and Network Technologies</option>
+        <option value="GE4 - Mathematics in the Modern World">GE4 - Mathematics in the Modern World</option>
+        <option value="GE1 - Understanding the Self">GE1 - Understanding the Self</option>
+        <option value="GE7 - Science, Technology and Society">GE7 - Science, Technology and Society</option>
+        <option value="FIL1 - Komunikasyon sa Akademikong Filipino">FIL1 - Komunikasyon sa Akademikong Filipino</option>
+        <option value="PE1 - Physical Fitness and Self-Testing Activities">PE1 - Physical Fitness and Self-Testing Activities</option>
+        <option value="NSTP1 - National Service Training Program1">NSTP1 - National Service Training Program1</option>
+        <option value="DM102 - Financial Management">DM102 - Financial Management</option>
+        <option value="PROFEL1 - IS Innovations & New Technologies">PROFEL1 - IS Innovations & New Technologies</option>
+        <option value="CHF - Computer Hardware Fundamentals">CHF - Computer Hardware Fundamentals</option>
+        <option value="ACCTG1 - Principle of Accounting">ACCTG1 - Principle of Accounting</option>
+        <option value="CC105 - Information Management">CC105 - Information Management</option>
+        <option value="IS105 - Enterprise Architecture">IS105 - Enterprise Architecture</option>
+        <option value="DM103 - Business Process Management">DM103 - Business Process Management</option>
+        <option value="QUAMET - Quantitative Methods">QUAMET - Quantitative Methods</option>
+        <option value="PROFEL 2 - Human Computer Interaction">PROFEL2 - Human Computer Interaction</option>
+        <option value="IS106 - IS Project Management 1">IS106 - IS Project Management 1</option>
+        <option value="DM104 - Evaluation of Business Performance">DM104 - Evaluation of Business Performance</option>
+        <option value="CAP101 - Capstone Project 1">CAP101 - Capstone Project 1</option>
+        <option value="PROFEL3 - Data Mining">PROFEL3 - Data Mining</option>
+        <option value="GV - Graphics and Visual Computing">GV - Graphics and Visual Computing</option>
+        <option value="IS107 - IS Strategy Management & Acquisition">IS107 - IS Strategy Management & Acquisition</option>
+        <option value="CC106 - Application Development & Emerging Technologies">CC106 - Application Development & Emerging Technologies</option>
+        <option value="CAP102 - Capstone Project 2">CAP102 - Capstone Project 2</option>
+        <option value="PROFEL4 - IT Security and Management">PROFEL4 - IT Security and Management</option>
+       <option value="ENTEP 111: Entrepreneurial Behavior">ENTEP 111: Entrepreneurial Behavior</option>
+        <option value="Econ 222: Microeconomics">Econ 222: Microeconomics</option>
+        <option value="OS: Opportunity Seeking ">OS: Opportunity Seeking </option>
+        <option value="ELO:  Entrepreneurial Leadership in an Organization">ELO:  Entrepreneurial Leadership in an Organization</option>
+        <option value="MRCB:  Market Research and Consumer Behaviour">MRCB:  Market Research and Consumer Behaviour</option>
+        <option value="IM:  Innovation Management">IM:  Innovation Management</option>
+        <option value="PC:  Pricing and Costing">PC:  Pricing and Costing</option>
+        <option value="HRM:  Human Resource Management">HRM:  Human Resource Management</option>
+        <option value="SSP:  Social Science & Philosophy">SSP:  Social Science & Philosophy</option>
+        <option value="FM:  Financial Management">FM:  Financial Management</option>
+        <option value="POM:  Production and Operation management">POM:  Production and Operation management</option>
+        <option value="TOB 1(Track1):  Tourism Business 1">TOB 1(Track1):  Tourism Business 1</option>
+        <option value="WSM (Elect1):  Wholesale and Retail Management">WSM (Elect1):  Wholesale and Retail Management</option>
+        <option value="ABM(Elect2):  Agribusiness">ABM(Elect2):  Agribusiness</option>
+        <option value="BPP:  Business Plan Preparation">BPP:  Business Plan Preparation</option>
+        <option value="TOB 2 (Tract2):  Tourism Business 2">TOB 2 (Tract2):  Tourism Business 2</option>
+        <option value="FBM (Elect 3):  Family Business Management">FBM (Elect 3):  Family Business Management</option>
+        <option value="MSE (Elect4):  Managing Service Enterprise">MSE (Elect4):  Managing Service Enterprise</option>
+        <option value="IBT:  International Business and Trade">IBT:  International Business and Trade</option>
+        <option value="BLT:  Business Law and Taxation">BLT:  Business Law and Taxation</option>
+        <option value="SM:  Strategic Management">SM:  Strategic Management</option>
+        <option value="BP IMPL1:  Business Implementation 1">BP IMPL1:  Business Implementation 1</option>
+        <option value="SC:  Social Entrepreneurship">SC:  Social Entrepreneurship</option>
+        <option value="TOB3 (Track3):  Tourism Business 3">TOB3 (Track3):  Tourism Business 3</option>
+        <option value="BP IMPL:  Business Plan Implementation 2">BP IMPL:  Business Plan Implementation 2</option>
+        <option value="PPD:  Program and Policies on Enterprise Development">PPD:  Program and Policies on Enterprise Development</option>
+        <option value="TOB 4 (Track 4):  Tourism Business 4">TOB 4 (Track 4):  Tourism Business 4</option>
+        <option value="Crim 1: Intro to Criminology and Psych of Crimes">Crim 1: Intro to Criminology and Psych of Crimes</option>
+        <option value="Compl 1: Computer Application w/Lab">Compl 1: Computer Application w/Lab</option>
+        <option value="CLJ 1: Introduction to Philippine Criminal Justice System">CLJ 1: Introduction to Philippine Criminal Justice System</option>
+        <option value="Crim 2: Theories of Crime Causation">Crim 2: Theories of Crime Causation</option>
+        <option value="Crim 3: Human Behavior and Victimology">Crim 3: Human Behavior and Victimology</option>
+        <option value="CLI 2: Human Rights Education">CLI 2: Human Rights Education</option>
+        <option value="CDI 1: Fundamentals of Criminal Investigation and Intelligence">CDI 1: Fundamentals of Criminal Investigation and Intelligence</option>
+        <option value="CorAd 1: Institutional Correction">CorAd 1: Institutional Correction</option>
+        <option value="Forensic 1: Forensic Photography">Forensic 1: Forensic Photography</option>
+        <option value="Crim 4: Professional Conduct and Ethical Standards">Crim 4: Professional Conduct and Ethical Standards</option>
+        <option value="CLI 3: Criminal Law (Book 1)">CLI 3: Criminal Law (Book 1)</option>
+        <option value="CDI 2: Specialized Crime Investigation and Administration">CDI 2: Specialized Crime Investigation and Administration</option>
+        <option value="LEA 1: Law Enforcement Organization and Administration">LEA 1: Law Enforcement Organization and Administration</option>
+        <option value="Forensic 2: Personal Identification Techniques">Forensic 2: Personal Identification Techniques</option>
+        <option value="LEA 2: Comparative Models in Policing">LEA 2: Comparative Models in Policing</option>
+        <option value="LEA 3: Introduction to Industrial Security">LEA 3: Introduction to Industrial Security</option>
+        <option value="Nat Sci 1: General Chemistry">Nat Sci 1: General Chemistry</option>
+        <option value="Crim 5: Juvenile Delinquency and Juvenile System">Crim 5: Juvenile Delinquency and Juvenile System</option>
+        <option value="CLJ 4: Criminal Law (Book 2)">CLJ 4: Criminal Law (Book 2)</option>
+        <option value="CDI 3: Specialized Crime Investigation 2 with Simulation on Interrogation and Interview">CDI 3: Specialized Crime Investigation 2 with Simulation on Interrogation and Interview</option>
+        <option value="CDI 4: Traffic Management and Accident Investigation with Driving">CDI 4: Traffic Management and Accident Investigation with Driving</option>
+        <option value="CorAd 2: Non- Institutional Correction">CorAd 2: Non- Institutional Correction</option>
+        <option value="CFLM 1: Character Formation 1- Nationalism and Patriotism">CFLM 1: Character Formation 1- Nationalism and Patriotism</option>
+        <option value="Forensic 3: Forensic Chemistry and Toxicology">Forensic 3: Forensic Chemistry and Toxicology</option>
+        <option value="Forensic 4: Questioned Documents Examination">Forensic 4: Questioned Documents Examination</option>
+        <option value="Crim 6: Dispute resolution and crisis/incidents Management">Crim 6: Dispute resolution and crisis/incidents Management</option>
+        <option value="Crim 7: Criminological Research 1 (Research Methods with Applied Statistics)">Crim 7: Criminological Research 1 (Research Methods with Applied Statistics)</option>
+        <option value="CLJ 5: Evidence">CLJ 5: Evidence</option>
+        <option value="CDI 5: Technical English 1 (Investigative Report Writing and Presentation)">CDI 5: Technical English 1 (Investigative Report Writing and Presentation)</option>
+        <option value="CorAd 3: Therapeutic Modalities">CorAd 3: Therapeutic Modalities</option>
+        <option value="CFLM 2: Character Formation 2: Leadership, Decision Making, Management and Administration">CFLM 2: Character Formation 2: Leadership, Decision Making, Management and Administration</option>
+        <option value="Forensic 5: Lie Detection Techniques">Forensic 5: Lie Detection Techniques</option>
+        <option value="Forensic 6: Forensic Ballistics">Forensic 6: Forensic Ballistics</option>
+        <option value="LEA 4: Law Enforcement Operation and Planning with Crime Mapping">LEA 4: Law Enforcement Operation and Planning with Crime Mapping</option>
+        <option value="Crim 8: Criminological Research 2 (Thesis Writing)">Crim 8: Criminological Research 2 (Thesis Writing)</option>
+        <option value="CLI 6: Criminal Procedure and Court Testimony">CLI 6: Criminal Procedure and Court Testimony</option>
+        <option value="CDI 6: Fire Protection and Arson Investigation">CDI 6: Fire Protection and Arson Investigation</option>
+        <option value="CDI 7: Vice and Drug Education and Control">CDI 7: Vice and Drug Education and Control</option>
+        <option value="CDI 8: Technical English 2 (Legal Forms)">CDI 8: Technical English 2 (Legal Forms)</option>
+        <option value="CDI 9: Introduction to cybercrime and environment laws and protection">CDI 9: Introduction to cybercrime and environment laws and protection</option>
+        <option value="Practicum 1 & 2: On-the-job training (540hours)">Practicum 1 & 2: On-the-job training (540hours)</option>
+        <option value="Prerev: Pre-review">Prerev: Pre-review</option>
+        <option value="PA121:  Introduction to Public Administration">PA121:  Introduction to Public Administration</option>
+        <option value="PA 122: Special Topics in Public Administration">PA 122: Special Topics in Public Administration</option>
+        <option value="PA 215: Sociology/Psychology">PA 215: Sociology/Psychology</option>
+        <option value="PA 211:  Good Governance and Social Responsibility">PA 211:  Good Governance and Social Responsibility</option>
+        <option value="PA212:  Philippine Administrative Thoughts and Institution">PA212:  Philippine Administrative Thoughts and Institution</option>
+        <option value="PA213:  Operation Management for PA">PA213:  Operation Management for PA</option>
+        <option value="Econ 1:  Principles of Economics w/ LRT">Econ 1:  Principles of Economics w/ LRT</option>
+        <option value="PA 221: Strategic Management (CBMEC)">PA 221: Strategic Management (CBMEC)</option>
+        <option value="PA 222: Globalization and Public Administration">PA 222: Globalization and Public Administration</option>
+        <option value="Free Elect 1: Public Enterprise">Free Elect 1: Public Enterprise</option>
+        <option value="PA 311: Knowledge Management and ICT for PA">PA 311: Knowledge Management and ICT for PA</option>
+        <option value="PA 312: Public Accounting and Budgeting">PA 312: Public Accounting and Budgeting</option>
+        <option value="PA 313: Local and Regional Governance">PA 313: Local and Regional Governance</option>
+        <option value="PA 314: Public Personnel Administration">PA 314: Public Personnel Administration</option>
+        <option value="PA 315: Public Fiscal Administration">PA 315: Public Fiscal Administration</option>
+        <option value="Free Elect 2: Voluntary Sector Management">Free Elect 2: Voluntary Sector Management</option>
+        <option value="PA 214: Ethics and Accountability in the Public Service">PA 214: Ethics and Accountability in the Public Service</option>
+        <option value="PA 321: Organization and Management">PA 321: Organization and Management</option>
+        <option value="PA 322: Human Behavior in Organization">PA 322: Human Behavior in Organization</option>
+        <option value="PA 323: Administrative Law">PA 323: Administrative Law</option>
+        <option value="PA 324: Public Policy & Program Administration">PA 324: Public Policy & Program Administration</option>
+        <option value="MR 1:  Research Method in PA">MR 1:  Research Method in PA</option>
+        <option value="PA 223:  Politics and Administration">PA 223:  Politics and Administration</option>
+        <option value="PA 411:  Leadership and Design Making">PA 411:  Leadership and Design Making</option>
+        <option value="PA 412:  Governance and Development">PA 412:  Governance and Development</option>
+        <option value="Free Elect 3:  Environmental Management">Free Elect 3:  Environmental Management</option>
+        <option value="Free Elect 4: Resource Management">Free Elect 4: Resource Management</option>
+        <option value="MR 2: Research Method in PA 2 (Thesis Writing)">MR 2: Research Method in PA 2 (Thesis Writing)</option>
+        <option value="AGRI 111: Introduction to Agriculture">AGRI 111: Introduction to Agriculture</option>
+        <option value="Ag EXT  111: Agricultural Extension and Communication">Ag EXT  111: Agricultural Extension and Communication</option>
+        <option value="CROP PROT 111: Principles of Crop Protection">CROP PROT 111: Principles of Crop Protection</option>
+        <option value="NAT SCI 1: Organic Chemistry">NAT SCI 1: Organic Chemistry</option>
+        <option value="SOIL SCI 1: Principles of Soil Science">SOIL SCI 1: Principles of Soil Science</option>
+        <option value="AN SCI 1: Introduction to Animal Science">AN SCI 1: Introduction to Animal Science</option>
+        <option value="CROP SCI 1: Principles of Crop Production">CROP SCI 1: Principles of Crop Production</option>
+        <option value="CROP PROT 211: Approaches and Practices in Pest Management">CROP PROT 211: Approaches and Practices in Pest Management</option>
+        <option value="GEN 111: Principles of Genetics">GEN 111: Principles of Genetics</option>
+        <option value="SOIL SCI 2: Soil Fertility Conservation and Management">SOIL SCI 2: Soil Fertility Conservation and Management</option>
+        <option value="AN SCI 2: Introduction to Poultry and Livestock Prod'n">AN SCI 2: Introduction to Poultry and Livestock Prod'n</option>
+        <option value="CROP SCI 2: Practices of Crop Production">CROP SCI 2: Practices of Crop Production</option>
+        <option value="AGRI 222: Introduction to Organic Agriculture">AGRI 222: Introduction to Organic Agriculture</option>
+        <option value="AG RES 311: Methods of Agricultural Research">AG RES 311: Methods of Agricultural Research</option>
+        <option value="AGRI MECH. 211: Basic Farm Machineries and Mechanization">AGRI MECH. 211: Basic Farm Machineries and Mechanization</option>
+        <option value="Nat SCI 2: General Biochemistry">Nat SCI 2: General Biochemistry</option>
+        <option value="AG ECON 222: Principles of Agricultural Entrepreneurship & Marketing">AG ECON 222: Principles of Agricultural Entrepreneurship & Marketing</option>
+        <option value="COMP ED 1: Basic Comp. Concept and Application">COMP ED 1: Basic Comp. Concept and Application</option>
+        <option value="ENVI SCI 1: Natural Resource & Environmental Management">ENVI SCI 1: Natural Resource & Environmental Management</option>
+        <option value="AG EXT 211: Management of Extension Program">AG EXT 211: Management of Extension Program</option>
+        <option value="COP PROT 311: General Physiology and Toxicology">COP PROT 311: General Physiology and Toxicology</option>
+        <option value="Ag ECON 223: Intro to Agricultural Commodity and Enterprise Development">Ag ECON 223: Intro to Agricultural Commodity and Enterprise Development</option>
+        <option value="HORT 1: Plant Growth and Development">HORT 1: Plant Growth and Development</option>
+        <option value="HORT 2: Fruit Crops Prod'n & Post Harvest Handling">HORT 2: Fruit Crops Prod'n & Post Harvest Handling</option>
+        <option value="AGRI 311: Basic Biotechnology">AGRI 311: Basic Biotechnology</option>
+        <option value="AN SCI 2: Slaughtering and Processing of Animal Product">AN SCI 2: Slaughtering and Processing of Animal Product</option>
+        <option value="AE 121: Intro to Water Management and Irrigation">AE 121: Intro to Water Management and Irrigation</option>
+        <option value="AGRI 441: Agricultural Policy and Development">AGRI 441: Agricultural Policy and Development</option>
+        <option value="HORT 311: Plant Propagation & Nursery Mgt.">HORT 311: Plant Propagation & Nursery Mgt.</option>
+        <option value="HORT 323: Plantation & Industrial Crop Prod’s & Primary Processing">HORT 323: Plantation & Industrial Crop Prod’s & Primary Processing</option>
+        <option value="CROP PROT 311: Beneficial Arthropods and Microorganism">CROP PROT 311: Beneficial Arthropods and Microorganism</option>
+        <option value="AGRI 211: Post-harvest Handling and Seed Technology">AGRI 211: Post-harvest Handling and Seed Technology</option>
+        <option value="HORT 411: Miniature Making, Landscaping & Flower Arrangement">HORT 411: Miniature Making, Landscaping & Flower Arrangement</option>
+        <option value="HORT 312: Perennial Crop Based Farming System">HORT 312: Perennial Crop Based Farming System</option>
+        <option value="HORT 312: Vegetable Crop Prod'n & Post Harvest Handling">HORT 312: Vegetable Crop Prod'n & Post Harvest Handling</option>
+        <option value="HORT 400: Urban Gardening & Aquaphonics">HORT 400: Urban Gardening & Aquaphonics</option>
+        <option value="IHC: Introduction to Health Care">IHC: Introduction to Health Care</option>
+        <option value="ANAPHY : Anatomy and Physiology">ANAPHY : Anatomy and Physiology</option>
+        <option value="M100: Foundation of Midwifery Practice">M100: Foundation of Midwifery Practice</option>
+        <option value="MW211: Microbiology and Parasitology">MW211: Microbiology and Parasitology</option>
+        <option value="PMSTHE: Principles Methods & Strategies of Teaching in Health Education">PMSTHE: Principles Methods & Strategies of Teaching in Health Education</option>
+        <option value="PHC 211: Introduction to community health and development">PHC 211: Introduction to community health and development</option>
+        <option value="ND 121: Nutrition and Dietetics">ND 121: Nutrition and Dietetics</option>
+        <option value="DTH: Digital Technology">DTH: Digital Technology</option>
+        <option value="M101: Obstetric and Newborn">M101: Obstetric and Newborn</option>
+        <option value="M102: Care of infants and children">M102: Care of infants and children</option>
+        <option value="MPHARM: Midwifery Pharmacology">MPHARM: Midwifery Pharmacology</option>
+        <option value="PHC: Health Programs">PHC: Health Programs</option>
+        <option value="SOC.SCI 7: Health Economics w/Taxation and Land Reform">SOC.SCI 7: Health Economics w/Taxation and Land Reform</option>
+        <option value="M103: Comprehensive Family Planning">M103: Comprehensive Family Planning</option>
+        <option value="M104: Maternal High Risk">M104: Maternal High Risk</option>
+        <option value="M105: Administration and Supervision">M105: Administration and Supervision</option>
+        <option value="CHM: Community Health Service Management">CHM: Community Health Service Management</option>
+        <option value="MRes1: Midwifery Research 1">MRes1: Midwifery Research 1</option>
+        <option value="M106: Prof. Growth & Development & BioEthics">M106: Prof. Growth & Development & BioEthics</option>
+        <option value="M107: Intensive Clinical Practicum">M107: Intensive Clinical Practicum</option>
+        <option value="MEntrep: Midwifery Entrepreneurship">MEntrep: Midwifery Entrepreneurship</option>
+        <option value="MRes2: Midwifery Research 2">MRes2: Midwifery Research 2</option>
+        <option value="ISMU: Integrating Seminars and Midwifery Updates">ISMU: Integrating Seminars and Midwifery Updates</option>
+        <option value="MID: Midwifery Major Competency Assessment">MID: Midwifery Major Competency Assessment</option>
+        <option value="GE 2: Readings in the Philippine History ">GE 2: Readings in the Philippine History </option>
+        <option value="GE 3: The Contemporary World ">GE 3: The Contemporary World </option>
+        <option value="GE 5: Purposive Communication">GE 5: Purposive Communication</option>
+        <option value="GE 6: Art Appreciation">GE 6: Art Appreciation</option>
+        <option value="GE 8: Ethics">GE 8: Ethics</option>
+        <option value="GE 9: Gender and Society">GE 9: Gender and Society</option>
+        <option value="GE 10/Elective:  Living in the IT Eras">GE 10/Elective:  Living in the IT Eras</option>     
+    </select>
+
+    <label>Call Number</label>
+    <input type="text" name="CallNumber" id="CallNumber" placeholder="Call Number">
+
+    <label>Book Name</label>
+    <input type="text" id="BookName" placeholder="Title of Book" required>
+
+    <label>Author</label>
+    <input type="text" id="author" placeholder="Author" required>
+
+    <label>Place of Publication</label>
+    <input type="text" id="PlaceofPublication" placeholder="Place of Publication">
+
+    <label for="recency">Book Year</label>
+    <input type="text" id="recency" placeholder="Book Recency" pattern="\d{4}" title="Please enter a valid year"  required>
+
+
+    <label>Type of Book</label>
+    <select id="type" title="type of book" required>
+        <option value="Textbook">Textbook</option>
+        <option value="Reference Book">Reference Book</option>
+        <option value="E-book">E-book</option>
+        <option value="Book">Book</option>
+        <option value="Scholarly Books">Scholarly Books</option>
+        <option value="Fiction Books">Fiction Books</option>
+        <option value="Non-Fiction Books">Non-Fiction Books</option>
+        <option value="Biographies">Biographies</option>
+        <option value="Poetry Books">Poetry Books</option>
+        <option value="Cookbooks">Cookbooks</option>
+        <option value="Self-Help Books">Self-Help Books</option>
+    </select>
+
+    <label>Volume of Books</label>
+    <input type="text" name="Volume" id="Volume" placeholder="Volume of Books" required>
+
+    <label for="Book Location">Location</label>
+    <input type="text" name="Book Location" id="Location" placeholder="Book Location" required>
+    
+    <button class="save" id="save" type="submit">Save</button>
+</div>
+<div class="FORCOURSE">
+    <button class="button1" style="background-image: url(../IMAGE/360_F_879520297_iPpQKKntqeoUTr3gWkJBTolxiToJTSRy.jpg);">
+        <a href="./BSIS1.html" style="background-color: none; color: white; text-decoration: none;">BSIS</a>
+    </button>
+    <button class="button2" style="background-image: url(../IMAGE/peak.jpg);">
+        <a href="./CRIM1.html" style="background-color: none; color: white; text-decoration: none;">CRIMINOLOGY</a>
+    </button>
+    <button class="button3" style="background-image: url(../IMAGE/peakpxx.jpg);">
+        <a href="./ENTREP1.html" style="background-color: none; color: white; text-decoration: none;">ENTREPRENEUR</a>
+    </button>
+    <button class="button4" style="background-image: url(../IMAGE/IMG_20240311_043620_543_copypeakpx.jpg);">
+        <a href="./AGRI1.html" style="background-color: none; color: white; text-decoration: none;">AGRICULTURE</a>
+    </button>
+    <button class="button5" style="background-image: url(../IMAGE/robot-child-reading-book-robot-education-book_39665-676.jpg);">
+        <a href="./MID1.html" style="background-color: none; color: white; text-decoration: none;">MIDWIFERY</a>
+    </button>
+    <button class="button6" style="background-image: url(../IMAGE/cas-connection-ai.jpg);">
+        <a href="./BPA1.html" style="background-color: none; color: white; text-decoration: none;">BPA</a>
+    </button>
+    <button class="button6" style="background-image: url(../IMAGE/IMG_20240311_043620_487_copypeakpx.jpg);">
+        <a href="./GENERALACADEMIC1.html" style="background-color: none; color: white; text-decoration: none;">GENERAL ACADAMIC</a>
+    </button>
+</div>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, set, ref, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    const firebaseConfig = {
+        apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
+        authDomain: "final-library-holding.firebaseapp.com",
+        projectId: "final-library-holding",
+        storageBucket: "final-library-holding.appspot.com",
+        messagingSenderId: "1039508541227",
+        appId: "1:1039508541227:web:4673a5b5d92e4c987e7f6e"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const saveButton = document.getElementById('save');
+   
+    function add() {
+
+        saveButton.disabled = true;
+    
+    const CallNumber = document.getElementById('CallNumber').value;
+    const bookName = document.getElementById('BookName').value;
+    const selectedCourses = Array.from(document.querySelectorAll('.programs input[name="course"]:checked')).map(checkbox => checkbox.value);
+    const selectedYear = document.getElementById('Year').value;
+    const Subject = document.getElementById('Subject').value;
+    const recency = document.getElementById('recency').value; // I-keep ito bilang string
+    const author = document.getElementById('author').value;
+    const PlaceofPublication = document.getElementById('PlaceofPublication').value;
+    const type = document.getElementById('type').value;
+    const Volume = document.getElementById('Volume').value;
+    const Location = document.getElementById("Location").value;
+
+    if (bookName === '' || Subject === '' || recency === '' || author === '' || type === '' || Volume === '') {
+        alert('Please fill out all required fields');
+        saveButton.disabled = false; 
+        return;
+    }
+
+    // Gumamit ng recency direktang bilang string
+    const promises = selectedCourses.map(course => {
+        return push(ref(db, `Journals/${course}/${selectedYear}`), {
+            CallNumber: CallNumber,
+            bookName: bookName,
+            Subject: Subject,
+            recency: recency, // Dito na gamitin ang recency
+            author: author,
+            PlaceofPublication: PlaceofPublication,
+            type: type,
+            Volume: Volume,
+            Location: Location
+        });
+    });
+
+    Promise.all(promises)
+        .then(() => {
+            alert("Successfully added");
+            document.getElementById('CallNumber').value = '';
+            document.getElementById('BookName').value = '';        
+            document.getElementById('recency').value = '';
+            document.getElementById('author').value = '';
+            document.getElementById('PlaceofPublication').value = '';
+            document.getElementById('type').value = '';
+            document.getElementById('Volume').value = '';
+            document.getElementById('Location').value = '';
+            
+        })
+        .catch((error) => {
+            alert(error.message);
+        })
+        .finally(() => {
+            saveButton.disabled = false;
+        });
+}
+
+    saveButton.addEventListener("click", add);
+
+    window.addEventListener("load", () => {
+    const subjectSelect = document.getElementById("Subject");
+    const options = Array.from(subjectSelect.options);
+
+    options.sort((a, b) => a.text.localeCompare(b.text));
+
+    subjectSelect.innerHTML = "";
+    options.forEach(option => subjectSelect.add(option));
+});
+
+document.getElementById("menu").addEventListener("click", function() {
+ var for1 = document.getElementById("for");
+
+ // I-toggle ang display ng menu
+ if (for1.style.display === "none" || for1.style.display === "") {
+  for1.style.display = "flex";
+
+ } else {
+  for1.style.display = "none";
+ }
+});
+
+</script>
+</body>
+</html>

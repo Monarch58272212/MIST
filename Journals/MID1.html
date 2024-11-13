@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/Journal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Journals: MIDWIFERY</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+</head>
+
+<body>
+    <div id="loadingIndicator" style="display:none;">Loading...</div>
+    <div class="nav">
+        <h1>Journals: Midwifery</h1>
+       <div class="search-box">
+        
+         <input type="text" id="searchInput" placeholder="Book Name & Subject">
+         <span class="search-icon">&#128269;</span>
+        </div>
+        <p id="totalVolumeDisplay"></p>
+         <button id="generatePDF"><i class="fas fa-file-pdf"></i></button>
+    </div>
+
+    <table>
+        <tbody id="bsisTableBody">
+           
+        </tbody>
+    </table>
+
+    <div class="edit-container" id="editContainer">
+        <h3>Edit Book</h3>
+        <form id="editForm">
+         <input type="hidden" id="editYear">
+         <input type="hidden" id="editBookId">
+        
+         <label>Call Number</label><br>
+         <input type="text" name="CallNumber" id="CallNumber" placeholder="Call Number"><br>
+        
+         <label for="editBookName">Book Name:</label><br>
+         <input type="text" id="editBookName"><br>
+        
+         <label for="editRecency">Year</label><br>
+         <input type="text" id="editRecency" pattern="\d{4}" title="Please enter a valid year" required><br>
+        
+        
+         <label for="editAuthor">Author:</label><br>
+         <input type="text" id="editAuthor" required><br>
+        
+         <label>Place of Publication</label><br>
+         <input type="text" id="PlaceofPublication" placeholder="Place of Publication"><br>
+        
+         <label>Type of Book</label><br>
+         <select id="editType" title="type of book" required>
+          <option value="Textbook">Textbook</option>
+          <option value="Reference Book">Reference Book</option>
+          <option value="E-book">E-book</option>
+          <option value="Book">Book</option>
+          <option value="Scholarly Books">Scholarly Books</option>
+          <option value="Fiction Books">Fiction Books</option>
+          <option value="Non-Fiction Books">Non-Fiction Books</option>
+          <option value="Biographies">Biographies</option>
+          <option value="Poetry Books">Poetry Books</option>
+          <option value="Cookbooks">Cookbooks</option>
+          <option value="Self-Help Books">Self-Help Books</option>
+         </select><br>
+        
+         <label for="editVolume">Volume:</label><br>
+         <input type="text" id="editVolume" required><br>
+        
+         <label for="Location">Location:</label><br>
+         <input type="text" id="Location"><br>
+        
+         <button type="button" onclick="saveChanges()">Save Changes</button>
+         <button type="button" onclick="cancelEdit()">Cancel</button>
+        </form>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, onValue, remove, update, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
+            authDomain: "final-library-holding.firebaseapp.com",
+            projectId: "final-library-holding",
+            storageBucket: "final-library-holding.appspot.com",
+            messagingSenderId: "1039508541227",
+            appId: "1:1039508541227:web:4673a5b5d92e4c987e7f6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        const tableBody = document.getElementById('bsisTableBody');
+        const editContainer = document.getElementById('editContainer');
+        const editForm = document.getElementById('editForm');
+
+        let totalVolume = 0;
+
+        function isOverdue(recencyDate) {
+         const today = new Date();
+         const recencyYear = new Date(recencyDate).getFullYear(); // Kunin lang ang taon
+         const tenYearsAgo = today.getFullYear() - 10; // Eksaktong 10 taon na nakalipas
+         return recencyYear < tenYearsAgo; // I-compare kung lumampas na sa 10 taon
+        }
+
+        function escapeSingleQuotes(str) {
+            if (str) {
+                return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+            }
+            return '';
+        }
+
+        let currentYearDisplayed = null;
+        const displayedSubjects = new Map(); 
+        function addRowToTable(year, subject, bookData, bookId) {
+            
+            if (currentYearDisplayed !== year) {
+               
+               const yearRow = document.createElement('tr');
+               yearRow.innerHTML = `<td colspan="9" style="font-weight: bold; background-color: black; text-align: center;"; class="year">Year: ${year}</td>`;
+               tableBody.appendChild(yearRow);
+               currentYearDisplayed = year; 
+               displayedSubjects.set(year, new Set());
+           }
+
+           const subjectsForYear = displayedSubjects.get(year);
+           if (!subjectsForYear.has(subject)) {
+             
+               const subjectRow = document.createElement('tr');
+               subjectRow.innerHTML = `<td  colspan="9" style="font-weight: bold; border: 1px solid #eee; background-color: black; text-align: left;" class="subject">Subject: ${subject}</td>`;
+               tableBody.appendChild(subjectRow);
+             
+                const headerRow = document.createElement('tr');
+                headerRow.innerHTML = `
+                    <th>Call Number</th>
+                    <th class="BN">Book Name</th>
+                    <th class="Rec">Year</th>
+                    <th class="Auth">Author</th>
+                    <th>Place of Publication</th>
+                    <th class="Type">Type</th>
+                    <th class="Volume">Volume</th>
+                    <th class="Location">Location</th>
+                    <th class="act">Actions</th>
+                `;
+                tableBody.appendChild(headerRow);
+
+                subjectsForYear.add(subject);
+            }
+
+ const row = document.createElement('tr');
+ row.innerHTML = `
+        <td>${escapeSingleQuotes(bookData.CallNumber)}</td>
+        <td>${escapeSingleQuotes(bookData.bookName)}</td>
+        <td>${(bookData.recency)}</td>
+        <td>${escapeSingleQuotes(bookData.author)}</td>
+        <td>${escapeSingleQuotes(bookData.PlaceofPublication)}</td>
+        <td>${bookData.type}</td>
+        <td>${bookData.Volume}</td>
+        <td>${escapeSingleQuotes(bookData.Location)}</td>
+        <td class="btn">
+            <button onclick="editBook('${year}', '${bookId}', '${escapeSingleQuotes(bookData.CallNumber)}', '${escapeSingleQuotes(bookData.bookName)}', '${bookData.recency}', '${escapeSingleQuotes(bookData.author)}', '${escapeSingleQuotes(bookData.PlaceofPublication)}', '${bookData.type}', '${bookData.Volume}', '${escapeSingleQuotes(bookData.Location)}')">
+                <i class="fas fa-edit"></i>
+            </button>
+            <button onclick="deleteBook('${year}', '${bookId}')">
+                <i class="fas fa-trash"></i>
+            </button>
+        </td>
+    `;
+ tableBody.appendChild(row);
+
+ const recencyYear = parseInt(bookData.recency);
+if (isOverdue(new Date(recencyYear, 0, 1))) {
+    row.style.border = '3px solid #00bcd4';
+}
+}
+
+function loadBooks() {
+    const bookingRef = ref(db, 'Journals/MIDWIFERY');
+    onValue(bookingRef, (snapshot) => {
+        tableBody.innerHTML = ''; 
+        totalVolume = 0;
+        snapshot.forEach((yearSnapshot) => {
+            const year = yearSnapshot.key;
+            yearSnapshot.forEach((bookSnapshot) => {
+                const bookData = bookSnapshot.val();
+                const bookId = bookSnapshot.key;
+                addRowToTable(year, bookData.Subject, bookData, bookId);
+                if (!isNaN(bookData.Volume)) { 
+                    totalVolume += parseInt(bookData.Volume);
+                }
+            });
+        });
+
+        document.getElementById("totalVolumeDisplay").textContent = "Total Volume of Books: " + totalVolume;
+    });
+}
+
+window.deleteBook = function(year, bookId) {
+    if (confirm("Are you sure you want to delete this book?")) {
+        const bookRef = ref(db, `Journals/MIDWIFERY/${year}/${bookId}`);
+        remove(bookRef)
+            .then(() => {
+                alert('Book deleted successfully');
+            })
+            .catch((error) => {
+                console.error('Error deleting book:', error);
+            });
+    }
+};
+
+window.editBook = function(year, bookId, CallNumber, bookName, recency, author, PlaceofPublication, type, volume, bookLocation) {
+    editContainer.style.display = 'block';
+    document.getElementById('CallNumber').value = CallNumber;
+    document.getElementById('editYear').value = year;
+    document.getElementById('editBookId').value = bookId;
+    document.getElementById('editBookName').value = bookName;
+    document.getElementById('editRecency').value = recency;
+    document.getElementById('editAuthor').value = author;
+    document.getElementById('PlaceofPublication').value = PlaceofPublication;
+    document.getElementById('editType').value = type;
+    document.getElementById('editVolume').value = volume;
+    document.getElementById('Location').value = bookLocation;
+};
+
+import { get, child } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+window.saveChanges = function() {
+    document.getElementById('loadingIndicator').style.display = 'block';
+
+    const CallNumber = document.getElementById('CallNumber').value;
+    const year = document.getElementById('editYear').value;
+    const bookId = document.getElementById('editBookId').value;
+    const bookName = document.getElementById('editBookName').value;
+    const recencyYear = document.getElementById('editRecency').value;
+    const author = document.getElementById('editAuthor').value;
+    const PlaceofPublication = document.getElementById('PlaceofPublication').value;
+    const type = document.getElementById('editType').value;
+    const volume = document.getElementById('editVolume').value;
+    const location = document.getElementById('Location').value;
+
+    const bookRef = ref(db, `Journals/MIDWIFERY/${year}/${bookId}`);
+    const updates = {
+        CallNumber: CallNumber,
+        bookName: bookName,
+        recency: recencyYear,
+        author: author,
+        PlaceofPublication: PlaceofPublication,
+        type: type,
+        Volume: volume,
+        Location: location
+    };
+
+    update(bookRef, updates)
+        .then(() => {
+            alert('Book updated successfully'); 
+            loadBooks();
+            editContainer.style.display = 'none'; 
+            editForm.reset();
+        })
+        .catch((error) => {
+            console.error('Error updating book:', error);
+            alert('Failed to update the book. Please try again.');
+        })
+        .finally(() => {
+            document.getElementById('loadingIndicator').style.display = 'none';
+        });
+};
+
+window.cancelEdit = function() {
+    editContainer.style.display = 'none';
+    editForm.reset();
+};
+loadBooks(); 
+
+function searchBooks() {
+ const searchTerm = document.getElementById('searchInput').value.toLowerCase(); 
+ const rows = tableBody.getElementsByTagName('tr'); 
+ let currentYear = null;
+
+ for (const row of rows) {
+  const cells = row.getElementsByTagName('td');
+  const yearRow = row.childNodes[0] && row.childNodes[0].colSpan; 
+
+  if (yearRow) {
+   currentYear = row.textContent; 
+   row.style.display = ''; 
+   continue;
+  }
+
+  if (cells.length > 0) {
+    const bookName = cells[1]?.textContent.toLowerCase(); // Adjust index as needed
+const subject = currentYear ? currentYear.split(': ')[1].toLowerCase() : ''; // Check current subject
+
+
+   const hasValue = bookName && subject;
+
+   if (hasValue && (bookName.includes(searchTerm) || subject.toLowerCase().includes(searchTerm))) {
+    row.style.display = ''; 
+   } else {
+    row.style.display = 'none'; 
+   }
+  } else {
+   if (row.querySelector('th')) {
+    
+    row.style.display = '';
+   } else {
+
+    row.style.display = 'none';
+   }
+  }
+ }
+}
+
+document.getElementById('searchInput').addEventListener('keyup', searchBooks);
+
+function generatePDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFontSize(14);
+    doc.text("Midwifery Books Data", 105, 10, null, null, 'center'); // Title sa gitna
+    doc.setFontSize(12);
+    doc.text("Total Volume: " + totalVolume, 105, 16, null, null, 'center'); // Total volume sa gitna
+
+    const rows = [];
+    let currentYear = null;
+
+    const tableBody = document.getElementById('bsisTableBody');
+    tableBody.querySelectorAll('tr').forEach(row => {
+        const columns = row.querySelectorAll('td');
+
+        if (columns.length === 1 && columns[0].colSpan === 9) {
+            const textContent = columns[0].textContent;
+
+            if (textContent.includes("Year:")) {
+                currentYear = textContent.split("Year: ")[1]; 
+                rows.push([{ content: `Year: ${currentYear}`, colSpan: 9, styles: { halign: 'center', fontStyle: 'bold', fillColor: [0, 0, 0], textColor: [0, 255, 255] } }]);
+            } else if (textContent.includes("Subject:")) {
+                const subject = textContent.split("Subject: ")[1]; 
+                rows.push([{ content: `Subject: ${subject}`, colSpan: 9, styles: { halign: 'left', fontStyle: 'bold', fillColor: [0, 0, 0], textColor: [0, 255, 255] } }]);
+            }
+        } else if (columns.length > 0) {
+            const rowData = Array.from(columns).map((column, index) => {
+                const content = column.innerText;
+
+                // Check if this row is overdue
+                const recencyYear = parseInt(columns[2].innerText); // Assuming the year is in the 3rd column
+                const isOverdueRow = isOverdue(new Date(recencyYear, 0, 1));
+
+                if (isOverdueRow) {
+                    return {
+                        content: content,
+                        styles: { lineColor: [255, 0, 0], lineWidth: 0.5 } // Red border for overdue books
+                    };
+                } else {
+                    return content; // Normal content for non-overdue books
+                }
+            });
+            rows.push(rowData);
+        }
+    });
+
+    const headers = [
+        "Call Number",
+        "Book Name",
+        "Year",
+        "Author",
+        "Place of Publication",
+        "Type",
+        "Volume",
+        "Location"
+    ];
+
+    doc.autoTable({
+        head: [headers],
+        body: rows,
+        startY: 30,
+        theme: 'grid',
+        styles: { fontSize: 8 },
+        margin: { top: 20, bottom: 20 }, // Adjust margins if necessary
+        pageBreak: 'auto', // Automatically add a page break if needed
+    });
+
+    doc.save('library_books_data.pdf');
+}
+document.getElementById('generatePDF').addEventListener('click', generatePDF);
+</script>
+</body>
+</html>

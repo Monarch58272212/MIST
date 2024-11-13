@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGISTER FORM</title>
+    <link rel="stylesheet" href="REGISTER.css">
+ 
+</head>
+<body>
+
+
+ <!-- <img class="image1" src="../IMAGE/360_F_806036332_1lS3pZ7XA9a3V8Q8SNNGUJ68qgRDKBiE-removebg-preview.png" alt="">-->
+
+ 
+
+      
+    <form action="register-form">
+        <h3>REGISTER FORM</h3>
+        <input type="email" id="email" placeholder="Email" autocomplete="username" required>
+        <input type="password"  id="password" placeholder="Password" autocomplete="current-password" required>
+        <input type="text" id="fnameInp" placeholder="First Name" required>
+        <input type="text" id="lnameInp" placeholder="Last Name" required>
+        
+        <button id="submit" type="submit">Register</button>
+        <div>
+         <hr><p>or</p><hr>
+        </div>
+        <a href="LOGIN.html">Login</a>
+        <h6 id="message"></h6>
+     </form>
+
+    
+    <script type="module">
+     
+     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+ const firebaseConfig = {
+   apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
+   authDomain: "final-library-holding.firebaseapp.com",
+   projectId: "final-library-holding",
+   storageBucket: "final-library-holding.appspot.com",
+   messagingSenderId: "1039508541227",
+   appId: "1:1039508541227:web:4673a5b5d92e4c987e7f6e"
+ };
+
+ const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase();
+const dbref = ref(db);
+
+const Messagesuccess = document.getElementById('message');
+ const submit = document.getElementById('submit');
+
+ submit.addEventListener("click", function(event){
+    event.preventDefault()
+    let FnameInp = document.getElementById('fnameInp').value;
+    let LnameInp = document.getElementById('lnameInp').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    if (FnameInp === '' || LnameInp === "") {
+     alert("please fill all input fields")
+     return;
+    }
+
+    createUserWithEmailAndPassword(auth, email, password,)
+    .then((userCredential) => { set(ref(db, 'USER/' + userCredential.user.uid), {
+      firstname: FnameInp,
+      lastname: LnameInp
+    })
+      // Signed up 
+      const user = userCredential.user;
+      Messagesuccess.innerHTML = "Account Successfully Register"
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorMessage)
+    });
+ })
+     
+    </script>
+    
+     
+</body>
+</html>

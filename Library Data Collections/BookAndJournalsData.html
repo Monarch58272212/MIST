@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>Holding Select</title>
+</head>
+
+<style>
+
+body {
+ width: 100vw;
+ height: 100vh;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin: 0;
+ justify-items: center;
+ background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+
+}
+ 
+button {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+border-radius: 8% 92% 75% 25% / 22% 37% 63% 78%;
+  border: none;
+  width: 10%;
+  height: 20px;
+  background-color: white;
+  box-shadow: rgba(223, 194, 194, 0.35) 0px 5px 15px;
+ }
+
+ button a {
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+ }
+ 
+ .Holdings {
+  width: 90%;
+  display: flex;
+ justify-content: center;
+ align-items: center;
+ justify-items: center;
+ gap: 100px;
+ box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+ padding: 20px;
+ flex-direction: row;
+ border-radius: 10px;
+ }
+ 
+ .IMAGE1:nth-child(1) {
+  display: flex;
+  justify-content: center;
+ align-items: center;
+ justify-items: center;
+  font-weight: bolder;
+  font-family: cursive;
+  width: 200px;
+  height: 150px;
+  text-decoration: none;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-image: url(../IMAGE/robot-child-reading-book-robot-education-book_39665-676.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: cover;
+  color: black;
+  transition: all 0.6s;
+  border-radius: 81% 92% 75% 25% / 40% 37% 83% 78%;
+ }
+ 
+ .IMAGE2:nth-child(2) {
+  display: flex;
+  font-weight: bolder;
+  justify-content: center;
+ align-items: center;
+ justify-items: center;
+ border-radius: 51% 2% 15% 25% / 45% 37% 63% 8%;
+  width: 200px;
+  height: 150px;
+  text-decoration: none;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-image: url(../IMAGE/cas-connection-ai.jpg);
+ background-size: cover;
+    background-repeat: no-repeat;
+    font-family: cursive;
+    object-fit: cover;
+  color: black;
+  transition: all 0.6s;
+ }
+
+ .IMAGE1:nth-child(1):hover, .IMAGE2:nth-child(2):hover {
+  width: 230px;
+  height: 165px;
+  border-radius: 0;
+ }
+ 
+ 
+ @media(max-width: 540px){
+  
+  .Holdings {
+   width: 70%;
+   height: 70%;
+   display: flex;
+   flex-direction: column;
+  }
+  
+  button {
+   width: 20%;
+   font-family: cursive;
+  }
+  
+  button a {
+   font-size: 13px;
+  }
+  
+ 
+  
+ }
+
+
+</style>
+
+<body>
+ 
+   <button id="logout" type="submit"> <a href="../index.html">Back</a></button>
+   
+   <div class="Holdings">
+   
+  <a class="IMAGE1" href="../Library Data Collections/JournalDataPath.html" style="color: aqua">Journals</a>
+ 
+ <a class="IMAGE2" href="../Library Data Collections/BookDataPath.html" style="color: aqua">Books</a>
+ 
+ </div>
+ 
+</body>
+
+
+
+</html>

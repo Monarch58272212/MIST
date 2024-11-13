@@ -1,0 +1,103 @@
+body {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    background-image: linear-gradient(to right, #92fe9d 0%, #00c9ff 100%);
+    
+   }
+   
+   .FORCOURSE button {
+    width: 150px;
+    height: 80px;
+    background-size: cover;
+    border: none;
+    background-repeat: no-repeat;
+    color: white;
+    box-shadow: 5px 5px 14px #d1d1d1;
+    transition: all 0.4s;
+   }
+
+   .FORCOURSE button:hover {
+    scale: 1.3;
+   }
+   
+
+   .FORCOURSE {
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 30% 30%;
+    gap: 40px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+   }
+   
+   .FORCOURSE .button1:nth-child(1) {
+    position: absolute;
+    margin: 20px;
+    }
+
+    button a {
+        background-color: transparent;
+        text-decoration: none;
+        color: white;
+    }
+
+    .location {
+        position: absolute;
+        top: 15px;
+        left: 10px;
+    }
+
+    .location button {
+        width: 50px;
+        background-color: black;
+        color: white;
+        width: auto;
+        border: none;
+        border-radius: 2px;
+    }
+    
+    @media(max-width: 768px){
+ 
+ body {
+  width: 100vw;
+  height: 100vh;
+ }
+
+ 
+.FORCOURSE {
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    /* border: 1px solid aqua;*/
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 50px;
+   }
+
+    .FORCOURSE button {
+     width: 90px;
+     height: 85px;
+     background-size: cover;
+     border: none;
+     background-repeat: no-repeat;
+     color: white;
+     box-shadow: 5px 5px 14px black;
+     transition: all 0.4s;
+     border-radius: 5px;
+    }
+    
+    a {
+     font-size: 9px;
+    }
+
+}
