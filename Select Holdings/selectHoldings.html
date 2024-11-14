@@ -134,41 +134,48 @@ border-radius: 8% 92% 75% 25% / 22% 37% 63% 78%;
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getDatabase, set, ref, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-  
-  const firebaseConfig = {
-   apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
-   authDomain: "final-library-holding.firebaseapp.com",
-   projectId: "final-library-holding",
-   storageBucket: "final-library-holding.appspot.com",
-   messagingSenderId: "1039508541227",
-   appId: "1:1039508541227:web:4673a5b5d92e4c987e7f6e"
-  };
- 
- const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  
- const auth = getAuth(app);
- const logoutButton = document.getElementById('logout');
- 
- logoutButton.addEventListener("click", function() {
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
+  authDomain: "final-library-holding.firebaseapp.com",
+  projectId: "final-library-holding",
+  storageBucket: "final-library-holding.appspot.com",
+  messagingSenderId: "1039508541227",
+  appId: "1:1039508541227:web:4673a5b5d92e4c987e7f6e"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const auth = getAuth(app);
+const logoutButton = document.getElementById('logout');
+
+// Check Authentication State on Page Load
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, allow access to the page
+    console.log("User is signed in:", user.uid);
+    //  ... (You can now access the user's information) 
+  } else {
+    // User is signed out
+    console.log("User is signed out");
+    window.location.href = "../index.html"; // Redirect to the login page
+  }
+});
+
+logoutButton.addEventListener("click", function() {
   if (confirm("Are you sure you want to logout?")) {
-   signOut(auth).then(() => {
-    alert("Successfully logged out");
-    history.replaceState(null, null, "../index.html");
-    window.location.href = "../index.html";
-   }).catch((error) => {
-    alert(error.message);
-   });
+    signOut(auth).then(() => {
+      alert("Successfully logged out");
+      window.location.href = "../index.html";
+    }).catch((error) => {
+      alert(error.message);
+    });
   }
- });
- 
- window.addEventListener("pageshow", function(event) {
-  if (event.persisted) {
-   window.location.href = "../index.html";
-  }
- });
+});
+
+
  
 </script>
 
