@@ -11,11 +11,16 @@ body {
    background: #181818;
 }
 
-table {
+.table-container {
+    max-height: 100vh;
+    overflow-y: auto;
     width: 98%;
-    border: none;
-    border-collapse: collapse;
     margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
     background: #252f38;
 }
 
@@ -38,7 +43,6 @@ th {
     background-color: #2f4f4f;
     border-bottom: 1px solid rosybrown;
     color: whitesmoke;
-    
 }
 
 td:nth-child(odd) {
@@ -47,7 +51,6 @@ td:nth-child(odd) {
 
 .year, .subject {
  color: #00bcd4;
- font-size: 20px;
 }
 
 .edit-container {
@@ -73,7 +76,6 @@ td:nth-child(odd) {
 
 .edit-container form input {
  margin: 5px;
- height: 20px;
  width: 90%;
  border: none;
 }
@@ -92,6 +94,13 @@ input {
  padding: 2px;
  width: 250px;
 border-radius: 3px;
+}
+
+p {
+ color: #00bcd4;
+ border: none;
+ padding: 2px;
+ background-color: transparent;
 }
 
 .nav {
@@ -115,7 +124,6 @@ border-radius: 3px;
  padding: 5px;
  background: none;
  border: 1px solid #444;
- transition: all 0.5s;
 }
 
 .btn button:nth-child(1) {
@@ -124,10 +132,6 @@ border-radius: 3px;
 
 .btn button:nth-child(2) {
  color: red;
-}
-
-.btn button:hover {
-    background-color: #00bcd4;
 }
 
 .btn {
@@ -150,67 +154,62 @@ transition: all 0.4s;
 }
 
 .search-box {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 40px;
-    border: 1px solid aqua;
-    height: 40px;
-    background-color: black;
-    border-radius: 50px;
-    transition: width 0.5s ease;
-    overflow: hidden;
-   }
+ position: relative;
+ display: flex;
+ align-items: center;
+ width: 200px;
+ border: 1px solid #00bcd4;
+ height: 20px;
+ color: aqua;
+ background-color: black;
+ border-radius: 20px;
+ transition: width 0.5s ease;
+ overflow: hidden;
+}
 
-   .search-icon {
-    position: absolute;
-    left: 8px;
-    font-size: 19px;
-    color: #333;
-    cursor: pointer;
-    transition: color 0.3s ease;
-   }
+.search-icon {
+ position: absolute;
+ left: 10px;
+ font-size: 10px;
+ color: #333;
+ cursor: pointer;
+ transition: color 0.3s ease;
+}
 
-   #searchInput {
-    flex: 1;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    font-size: 14px;
-    padding: 0 10px;
-    border: none;
-    outline: none;
-    background: black;
-    opacity: 0;
-    transition: width 0.5s ease, opacity 0.5s ease;
-   }
-   
-   .search-box:hover {
-    width: 200px;
-    height: 40px;
-    font-size: 15px;
-   }
-   
-   .search-box:hover #searchInput {
-    width: 100%;
-    opacity: 1;
-   }
-   
-   .search-box:hover .search-icon {
-    color: #666;
-   }
+#searchInput {
+ flex: 1;
+ text-align: center;
+ width: 0;
+ color: floralwhite;
+ font-size: 9px;
+ padding: 0 10px;
+ font-size: 9px;
+ border: none;
+ outline: none;
+ background: black;
+ opacity: 0;
+ transition: width 0.5s ease, opacity 0.5s ease;
+}
+
+#searchInput::placeholder {
+ color: aqua;
+}
+
+.search-box:hover #searchInput {
+ width: 100%;
+ opacity: 1;
+}
+
+.search-box:hover .search-icon {
+ color: #666;
+}
 
 .nav button:hover, .nav p:hover {
         scale: 1.3;
        }
           
 .nav p {
-    transition: all 0.4s;   
-    color: #00bcd4;
-    font-size: 20px;
-    border: none;
-    padding: 2px;
-    background-color: transparent;
+    transition: all 0.4s;
 }       
      
 h2, h3 {
@@ -272,7 +271,7 @@ h1 {
   transition: width 0.5s ease;
   overflow: hidden;
  }
-
+ 
  .search-icon {
   position: absolute;
   left: 10px;
@@ -281,7 +280,7 @@ h1 {
   cursor: pointer;
   transition: color 0.3s ease;
  }
-
+ 
  #searchInput {
   flex: 1;
   text-align: center;
@@ -295,7 +294,7 @@ h1 {
   opacity: 0;
   transition: width 0.5s ease, opacity 0.5s ease;
  }
-
+ 
  .search-box:hover {
   width: 200px;
  }
@@ -341,4 +340,3 @@ h1 {
 }
 
 }
-
