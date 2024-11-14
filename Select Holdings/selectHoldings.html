@@ -130,40 +130,35 @@ img {
 </body>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-  
-  const firebaseConfig = {
-     apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
-     authDomain: "final-library-holding.firebaseapp.com",
-     projectId: "final-library-holding",
-     storageBucket: "final-library-holding.appspot.com",
-     messagingSenderId: "1039508541227",
-     appId: "1:1039508541227:web:4673a5b5d92e4c987e7f6e"
-  };
-  
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  
-  onAuthStateChanged(auth, (user) => {
-     if (!user) {
-         window.location.href = "../index.html";
-     }
-  });
-  
-  const logoutButton = document.getElementById('logout');
-  
-  logoutButton.addEventListener("click", function() {
-     if (confirm("Are you sure you want to logout?")) {
-       signOut(auth).then(() => {
-         alert("Successfully logged out");
-         window.location.href = "../index.html"; 
-       }).catch((error) => {
-         alert(error.message);
-       });
-     }
-  });
-  </script>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+   apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
+   authDomain: "final-library-holding.firebaseapp.com",
+   projectId: "final-library-holding",
+   storageBucket: "final-library-holding.appspot.com",
+   messagingSenderId: "1039508541227",
+   appId: "1:1039508541227:web:4673a5b5d92e4c987e7f6e"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const logoutButton = document.getElementById('logout');
+
+logoutButton.addEventListener("click", function() {
+   if (confirm("Are you sure you want to logout?")) {
+     signOut(auth).then(() => {
+       alert("Successfully logged out");
+       window.history.replaceState(null, null, "../index.html"); // Replace the current page in history
+       window.location.href = "../index.html"; // Redirect to login page after logout
+     }).catch((error) => {
+       alert(error.message);
+     });
+   }
+});
+</script>
+
   
 
 </html>
