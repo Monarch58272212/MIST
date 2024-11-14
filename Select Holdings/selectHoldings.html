@@ -172,12 +172,7 @@ logoutButton.addEventListener("click", async () => {
   }
 });
 
-// Prevent going back to the previous page after logout
-window.addEventListener('pageshow', (event) => {
-  if (event.persisted) {
-    window.location.href = '../index.html'; 
-  }
-});
+
 
  
 </script>
