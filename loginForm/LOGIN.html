@@ -1,30 +1,79 @@
-<script type="module">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN FORM</title>
+    <link rel="stylesheet" href="LOGIN.css">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+</head>
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+<body>
 
-const firebaseConfig = {
-   apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
-   authDomain: "final-library-holding.firebaseapp.com",
-   projectId: "final-library-holding",
-   storageBucket: "final-library-holding.appspot.com",
-   messagingSenderId: "1039508541227",
-   appId: "1:1039508541227:web:4673a5b5d92e4c987e7f6e"
-};
+    <form action="register-form" autocomplete="off">
+        <h3>Librarian Login Form</h3>
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const logoutButton = document.getElementById('logout');
+        <input type="email" id="email" placeholder="Email" autocomplete="username" required>
+        <input type="password" id="password" placeholder="Password" autocomplete="current-password" required>
 
-logoutButton.addEventListener("click", function() {
-   if (confirm("Are you sure you want to logout?")) {
-     signOut(auth).then(() => {
-       alert("Successfully logged out");
-       window.location.href = "../index.html"; // Redirect to login page after logout
-     }).catch((error) => {
-       alert(error.message);
-     });
-   }
-});
+        <button id="submit" type="submit">Login</button>
+    </form>
 
-</script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
+            authDomain: "final-library-holding.firebaseapp.com",
+            projectId: "final-library-holding",
+            storageBucket: "final-library-holding.appspot.com",
+            messagingSenderId: "1039508541227",
+            appId: "1:1039508541227:web:4673a5b5d92e4c987e7f6e"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const submit = document.getElementById('submit');
+
+        submit.addEventListener("click", function(event){
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (email === '' || password === '') {
+                alert('Please fill out all required fields');
+                return;
+            }
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+         
+                    const user = userCredential.user;
+                    alert("Login Account Successful...");
+
+                    document.getElementById('email').value = '';
+                    document.getElementById('password').value = '';
+
+                    setTimeout(function(){
+                        window.location.href = "../Select Holdings/selectHoldings.html";
+                    }, 500); 
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage);
+                });
+        });
+
+        window.addEventListener('load', function() {
+            document.querySelector('form').reset();
+        });
+    </script>
+
+</body>
+</html>
