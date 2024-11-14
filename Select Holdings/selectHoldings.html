@@ -151,29 +151,23 @@ const db = getDatabase(app);
 const auth = getAuth(app);
 const logoutButton = document.getElementById('logout');
 
-// Check Authentication State on Page Load
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, allow access to the page
-    console.log("User is signed in:", user.uid);
-    //  ... (You can now access the user's information) 
-  } else {
-    // User is signed out
-    console.log("User is signed out");
-    window.location.href = "../index.html"; // Redirect to the login page
+logoutButton.addEventListener("click", () => {
+  if (confirm("Are you sure you want to log out?")) {
+    // Sign Out Function
+    signOut(auth)
+      .then(() => {
+        // Successful Sign Out
+        console.log("User successfully signed out.");
+        // Redirect to the login page or another desired page
+        window.location.href = "../index.html"; 
+      })
+      .catch((error) => {
+        // Handle Errors during Sign Out
+        console.error("Error during sign out:", error);
+        // Display an error message to the user (e.g., using an alert)
+        alert("Error signing out. Please try again.");
+      });
   }
-});
-
-logoutButton.addEventListener("click", function() {
-  if (confirm("Are you sure you want to logout?")) {
-    signOut(auth).then(() => {
-      alert("Successfully logged out");
-      window.location.href = "../index.html";
-    }).catch((error) => {
-      alert(error.message);
-    });
-  }
-});
 
 
  
