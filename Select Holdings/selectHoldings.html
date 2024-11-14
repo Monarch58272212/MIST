@@ -18,13 +18,14 @@ body {
  align-items: center;
  justify-items: center;
  background-image: linear-gradient(to top, #2e1828 0%, #a21ec4 100%);
+
 }
  
-button {
+ button {
   position: absolute;
   top: 10px;
   left: 20px;
-  border-radius: 8% 92% 75% 25% / 22% 37% 63% 78%;
+border-radius: 8% 92% 75% 25% / 22% 37% 63% 78%;
   font-weight: bolder;
   border: none;
   width: 10%;
@@ -32,45 +33,46 @@ button {
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: black;
-}
+ }
  
-.Holdings {
+ .Holdings {
   width: 90%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-items: center;
-  gap: 50px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  padding: 20px;
-  flex-direction: row;
-}
+ justify-content: center;
+ align-items: center;
+ justify-items: center;
+ gap: 50px;
+ box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+ padding: 20px;
+ flex-direction: row;
+ }
  
-.one {
+ .one {
   display: flex;
   justify-content: center;
-  align-items: center;
+ align-items: center;
+ justify-items: center;
   font-size: 30px;
   width: 200px;
   height: 150px;
   text-decoration: none;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-image: url(../IMAGE/robot-child-reading-book-robot-education-book_39665-676.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  object-fit: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: cover;
   color: aqua;
   font-family: cursive;
   transition: all 0.6s;
   border-radius: 81% 92% 75% 25% / 40% 37% 83% 78%;
-}
+ }
  
-.two {
+ .two {
   display: flex;
   font-size: 30px;
   justify-content: center;
-  align-items: center;
-  justify-items: center;
+ align-items: center;
+ justify-items: center;
   width: 200px;
   font-family: cursive;
   height: 150px;
@@ -78,24 +80,25 @@ button {
   text-decoration: none;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-image: url(../IMAGE/cas-connection-ai.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  object-fit: cover;
+ background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: cover;
   color: aqua;
   transition: all 0.6s;
-}
+ }
 
-.one:hover, .two:hover {
+ .one:hover, .two:hover {
   width: 230px;
   height: 165px;
   border-radius: 0;
-}
+ }
 
-img {
+ img {
   width: 300px;
-}
+ }
  
-@media(max-width: 768px){
+ @media(max-width: 768px){
+  
   .Holdings {
    width: 70%;
    height: 70%;
@@ -115,50 +118,68 @@ img {
    font-weight: bold;
    color: white;
   }
-}
+  
+ }
+
 
 </style>
 
 <body>
+ 
    <button id="logout" type="submit">Logout</button>
    
+   
    <div class="Holdings">
-     <a class="one" href="../Journals/journalHoldings.html">Journal</a>
-     <a class="two" href="../Books/bookHoldings.html">Book</a>
-   </div>
+
+    <!--<img src="../IMAGE/library.png" alt="">-->
+
+  <a class="one" href="../Journals/journalHoldings.html">Journal</a>
+
+ <a class="two" href="../Books/bookHoldings.html">Book</a>
+ 
+ </div>
  
 </body>
 
 <script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-const firebaseConfig = {
+import { getDatabase, set, ref, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+  
+  const firebaseConfig = {
    apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
    authDomain: "final-library-holding.firebaseapp.com",
    projectId: "final-library-holding",
    storageBucket: "final-library-holding.appspot.com",
    messagingSenderId: "1039508541227",
    appId: "1:1039508541227:web:4673a5b5d92e4c987e7f6e"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const logoutButton = document.getElementById('logout');
-
-logoutButton.addEventListener("click", function() {
-   if (confirm("Are you sure you want to logout?")) {
-     signOut(auth).then(() => {
-       alert("Successfully logged out");
-       window.history.replaceState(null, null, "index.html"); // Replace the current page in history
-       window.location.href = "index.html"; // Redirect to login page after logout
-     }).catch((error) => {
-       alert(error.message);
-     });
-   }
-});
-</script>
-
+  };
+ 
+ const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
   
+ const auth = getAuth(app);
+ const logoutButton = document.getElementById('logout');
+ 
+ logoutButton.addEventListener("click", function() {
+  if (confirm("Are you sure you want to logout?")) {
+   signOut(auth).then(() => {
+    alert("Successfully logged out");
+    history.replaceState(null, null, "../index.html");
+    window.location.href = "../index.html";
+   }).catch((error) => {
+    alert(error.message);
+   });
+  }
+ });
+ 
+ window.addEventListener("pageshow", function(event) {
+  if (event.persisted) {
+   window.location.href = "../index.html";
+  }
+ });
+ 
+</script>
 
 </html>
