@@ -13,7 +13,6 @@ body {
  width: 100vw;
  height: 100vh;
  display: flex;
- margin: 0;
  justify-content: center;
  align-items: center;
  justify-items: center;
@@ -64,7 +63,6 @@ border-radius: 8% 92% 75% 25% / 22% 37% 63% 78%;
   color: aqua;
   font-family: cursive;
   transition: all 0.6s;
-  border-radius: 81% 92% 75% 25% / 40% 37% 83% 78%;
  }
  
  .two {
@@ -76,7 +74,6 @@ border-radius: 8% 92% 75% 25% / 22% 37% 63% 78%;
   width: 200px;
   font-family: cursive;
   height: 150px;
-  border-radius: 51% 2% 15% 25% / 45% 37% 63% 8%;
   text-decoration: none;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-image: url(../IMAGE/cas-connection-ai.jpg);
@@ -90,11 +87,6 @@ border-radius: 8% 92% 75% 25% / 22% 37% 63% 78%;
  .one:hover, .two:hover {
   width: 230px;
   height: 165px;
-  border-radius: 0;
- }
-
- img {
-  width: 300px;
  }
  
  @media(max-width: 768px){
@@ -131,8 +123,6 @@ border-radius: 8% 92% 75% 25% / 22% 37% 63% 78%;
    
    <div class="Holdings">
 
-    <!--<img src="../IMAGE/library.png" alt="">-->
-
   <a class="one" href="../Journals/journalHoldings.html">Journal</a>
 
  <a class="two" href="../Books/bookHoldings.html">Book</a>
@@ -145,35 +135,40 @@ border-radius: 8% 92% 75% 25% / 22% 37% 63% 78%;
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
-  authDomain: "final-library-holding.firebaseapp.com",
-  projectId: "final-library-holding",
-  storageBucket: "final-library-holding.appspot.com",
-  messagingSenderId: "1039508541227",
-  appId: "1:1039508541227:web:4673a5b5d92e4c987e7f6e"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const logoutButton = document.getElementById('logout');
-
-logoutButton.addEventListener("click", async () => {
+import { getDatabase, set, ref, push } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+  
+  const firebaseConfig = {
+   apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
+   authDomain: "final-library-holding.firebaseapp.com",
+   projectId: "final-library-holding",
+   storageBucket: "final-library-holding.appspot.com",
+   messagingSenderId: "1039508541227",
+   appId: "1:1039508541227:web:4673a5b5d92e4c987e7f6e"
+  };
+ 
+ const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  
+ const auth = getAuth(app);
+ const logoutButton = document.getElementById('logout');
+ 
+ logoutButton.addEventListener("click", function() {
   if (confirm("Are you sure you want to logout?")) {
-    try {
-      await signOut(auth);
-      alert("Successfully logged out");
-      // Redirect to the login page
-      window.location.href = "../index.html"; 
-    } catch (error) {
-      alert(error.message);
-    }
+   signOut(auth).then(() => {
+    alert("Successfully logged out");
+    history.replaceState(null, null, "../index.html");
+    window.location.href = "../index.html";
+   }).catch((error) => {
+    alert(error.message);
+   });
   }
-});
-
-
-
+ });
+ 
+ window.addEventListener("pageshow", function(event) {
+  if (event.persisted) {
+   window.location.href = "../index.html";
+  }
+ });
  
 </script>
 
