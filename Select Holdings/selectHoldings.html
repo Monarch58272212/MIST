@@ -151,6 +151,19 @@ const db = getDatabase(app);
 const auth = getAuth(app);
 const logoutButton = document.getElementById('logout');
 
+// Check Authentication State on Page Load
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, allow access to the page
+    console.log("User is signed in:", user.uid);
+    //  ... (You can now access the user's information) 
+  } else {
+    // User is signed out
+    console.log("User is signed out");
+    window.location.href = "../index.html"; // Redirect to the login page
+  }
+});
+
 logoutButton.addEventListener("click", () => {
   if (confirm("Are you sure you want to log out?")) {
     // Sign Out Function
@@ -168,6 +181,7 @@ logoutButton.addEventListener("click", () => {
         alert("Error signing out. Please try again.");
       });
   }
+});
 
 
  
