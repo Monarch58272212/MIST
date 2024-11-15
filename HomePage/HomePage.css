@@ -23,6 +23,7 @@ header {
     margin-left: 100px;
 }
 
+
 nav .login {
  margin: -10px 0  0 100px;
  text-align: center;
@@ -385,6 +386,37 @@ header a {
     }
 }
 
+@media screen and (max-width: 678px) {
+    .carousel .list .item .content{
+        padding-right: 0;
+    }
+    .carousel .list .item .content .title {
+        font-size: 30px;
+    }
+
+}
+
+
+section {
+    
+    background-image: url(./IMAGE/peakp.jpg);
+}
+
+section img {
+  animation: autorotate;
+  animation-timeline: view();
+  
+}
+
+@keyframes autorotate{
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg)
+  }
+}
+
 
 @media(max-width: 500px) {
  .carousel .list .item .content {
@@ -410,17 +442,6 @@ header a {
 }
 
 @media(max-width: 768px) {
-
-    .carousel .list .item .content {
-        position: absolute;
-        top: 20%;
-        left: 20px;
-        max-width: 80%;
-        box-sizing: border-box;
-        color: white;
-        text-shadow: 0 5px 10px #0004;
-    }
-    
  
  
 .carousel .list .item .content .buttons button  {
