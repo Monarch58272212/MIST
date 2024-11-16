@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
     <link rel="stylesheet" href="./CSS/Book.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Book: CRIMINOLOGY</title>
@@ -27,12 +24,12 @@
     </div>
 
     <div class="table-container">
-  <table>
-   <tbody id="bsisTableBody">
- 
-   </tbody>
-  </table>
-</div>
+        <table>
+         <tbody id="bsisTableBody">
+       
+         </tbody>
+        </table>
+      </div>
 
     <div class="edit-container" id="editContainer">
         <h3>Edit Book</h3>
@@ -85,6 +82,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getDatabase, ref, onValue, remove, update, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
@@ -97,6 +95,13 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
+        const auth = getAuth(app); 
+  
+  onAuthStateChanged(auth, (user) => {
+      if (!user) {          
+        window.location.href = "../index.html";
+      }
+  });
 
         const tableBody = document.getElementById('bsisTableBody');
         const editContainer = document.getElementById('editContainer');

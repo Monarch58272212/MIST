@@ -24,12 +24,12 @@
     </div>
 
     <div class="table-container">
-  <table>
-   <tbody id="bsisTableBody">
- 
-   </tbody>
-  </table>
-</div>
+        <table>
+         <tbody id="bsisTableBody">
+       
+         </tbody>
+        </table>
+      </div>
 
     <div class="edit-container" id="editContainer">
         <h3>Edit Book</h3>
@@ -82,6 +82,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getDatabase, ref, onValue, remove, update, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCEaP3U6pOjNyoMKgNDRl2akWjPYZygIHY",
@@ -94,6 +95,13 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
+        const auth = getAuth(app); 
+  
+  onAuthStateChanged(auth, (user) => {
+      if (!user) {          
+        window.location.href = "../index.html";
+      }
+  });
 
         const tableBody = document.getElementById('bsisTableBody');
         const editContainer = document.getElementById('editContainer');
