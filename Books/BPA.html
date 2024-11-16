@@ -14,11 +14,13 @@
     <div id="loadingIndicator" style="display:none;">Loading...</div>
     <div class="nav">
         <h1>Book: BPA</h1>
-         <div class="search-box">
         
-          <input type="text" id="searchInput" placeholder="Book Name & Subject">
-          <span class="search-icon">&#128269;</span>
-         </div>
+          <div class="search-box">
+        
+           <input type="text" id="searchInput" placeholder="Book Name & Subject">
+           <span class="search-icon">&#128269;</span>
+          </div>
+        
         <p id="totalVolumeDisplay"></p>
         <button id="generatePDF"><i class="fas fa-file-pdf"></i></button>
     </div>
@@ -47,13 +49,13 @@
             <input type="text" id="editRecency" pattern="\d{4}" title="Please enter a valid year" required><br>
             
 
-            <label for="editAuthor">Author:</label>
+            <label for="editAuthor">Author:</label><br>
             <input type="text" id="editAuthor" required><br>
 
-            <label>Place of Publication</label>
+            <label>Place of Publication</label><br>
             <input type="text" id="PlaceofPublication" placeholder="Place of Publication"><br>
 
-            <label>Type of Book</label>
+            <label>Type of Book</label><br>
             <select id="editType" title="type of book" required>
                 <option value="Textbook">Textbook</option>
                 <option value="Reference Book">Reference Book</option>
@@ -68,10 +70,10 @@
                 <option value="Self-Help Books">Self-Help Books</option>
             </select><br>
 
-            <label for="editVolume">Volume:</label>
+            <label for="editVolume">Volume:</label><br>
             <input type="text" id="editVolume"required><br>
 
-            <label for="Location">Location:</label>
+            <label for="Location">Location:</label><br>
             <input type="text" id="Location"><br>
 
             <button type="button" onclick="saveChanges()">Save Changes</button>
@@ -97,11 +99,11 @@
         const db = getDatabase(app);
         const auth = getAuth(app); 
   
-  onAuthStateChanged(auth, (user) => {
-      if (!user) {          
-        window.location.href = "../index.html";
-      }
-  });
+    onAuthStateChanged(auth, (user) => {
+        if (!user) {          
+            window.location.href = "../index.html";
+        }
+    });
 
         const tableBody = document.getElementById('bsisTableBody');
         const editContainer = document.getElementById('editContainer');
@@ -129,19 +131,19 @@
             
             if (currentYearDisplayed !== year) {
                
-               const yearRow = document.createElement('tr');
-               yearRow.innerHTML = `<td colspan="9" style="font-weight: bold; background-color: black; text-align: center;"; class="year">Year: ${year}</td>`;
-               tableBody.appendChild(yearRow);
-               currentYearDisplayed = year; 
-               displayedSubjects.set(year, new Set());
-           }
+                const yearRow = document.createElement('tr');
+                yearRow.innerHTML = `<td colspan="9" style="font-weight: bold; background-color: black; text-align: center;"; class="year">Year: ${year}</td>`;
+                tableBody.appendChild(yearRow);
+                currentYearDisplayed = year; 
+                displayedSubjects.set(year, new Set());
+            }
 
-           const subjectsForYear = displayedSubjects.get(year);
-           if (!subjectsForYear.has(subject)) {
-             
-               const subjectRow = document.createElement('tr');
-               subjectRow.innerHTML = `<td  colspan="9" style="font-weight: bold; border: 1px solid #eee; background-color: black; text-align: left;" class="subject">Subject: ${subject}</td>`;
-               tableBody.appendChild(subjectRow);
+            const subjectsForYear = displayedSubjects.get(year);
+            if (!subjectsForYear.has(subject)) {
+              
+                const subjectRow = document.createElement('tr');
+                subjectRow.innerHTML = `<td  colspan="9" style="font-weight: bold; border: 1px solid #eee; background-color: black; text-align: left;" class="subject">Subject: ${subject}</td>`;
+                tableBody.appendChild(subjectRow);
              
                 const headerRow = document.createElement('tr');
                 headerRow.innerHTML = `
@@ -162,7 +164,7 @@
 
  const row = document.createElement('tr');
  row.innerHTML = `
-        <td>${escapeSingleQuotes(bookData.CallNumber)}</td>
+        <td class="call">${escapeSingleQuotes(bookData.CallNumber)}</td>
         <td>${escapeSingleQuotes(bookData.bookName)}</td>
         <td>${(bookData.recency)}</td>
         <td>${escapeSingleQuotes(bookData.author)}</td>
@@ -184,6 +186,7 @@
  const recencyYear = parseInt(bookData.recency);
 if (isOverdue(new Date(recencyYear, 0, 1))) {
     row.style.border = '3px solid #00bcd4';
+    
 }
 }
 
@@ -396,7 +399,6 @@ function generatePDF() {
 
     doc.save('library_books_data.pdf');
 }
-
 document.getElementById('generatePDF').addEventListener('click', generatePDF);
 </script>
 </body>
