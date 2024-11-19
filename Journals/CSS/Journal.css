@@ -305,6 +305,7 @@ h1 {
 
        .search-box:hover {
         width: 200px;
+        height: 18px;
        }
 
        .search-box:hover #searchInput {
