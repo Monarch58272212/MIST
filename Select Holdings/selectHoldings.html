@@ -17,18 +17,18 @@ body {
  width: 100vw;
  height: 100vh;
  display: flex;
+ margin: 0;
  justify-content: center;
  align-items: center;
  justify-items: center;
  background-image: linear-gradient(to top, #2e1828 0%, #a21ec4 100%);
-
 }
  
- button {
+button {
   position: absolute;
   top: 10px;
   left: 20px;
-border-radius: 8% 92% 75% 25% / 22% 37% 63% 78%;
+  border-radius: 8% 92% 75% 25% / 22% 37% 63% 78%;
   font-weight: bolder;
   border: none;
   width: 10%;
@@ -36,65 +36,70 @@ border-radius: 8% 92% 75% 25% / 22% 37% 63% 78%;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: black;
- }
+}
  
- .Holdings {
+.Holdings {
   width: 90%;
   display: flex;
- justify-content: center;
- align-items: center;
- justify-items: center;
- gap: 50px;
- box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
- padding: 20px;
- flex-direction: row;
- }
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  gap: 50px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 20px;
+  flex-direction: row;
+}
  
- .one {
+.one {
   display: flex;
   justify-content: center;
- align-items: center;
- justify-items: center;
+  align-items: center;
   font-size: 30px;
   width: 200px;
   height: 150px;
   text-decoration: none;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-image: url(../IMAGE/robot-child-reading-book-robot-education-book_39665-676.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    object-fit: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: cover;
   color: aqua;
   font-family: cursive;
   transition: all 0.6s;
- }
+  border-radius: 81% 92% 75% 25% / 40% 37% 83% 78%;
+}
  
- .two {
+.two {
   display: flex;
   font-size: 30px;
   justify-content: center;
- align-items: center;
- justify-items: center;
+  align-items: center;
+  justify-items: center;
   width: 200px;
   font-family: cursive;
   height: 150px;
+  border-radius: 51% 2% 15% 25% / 45% 37% 63% 8%;
   text-decoration: none;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-image: url(../IMAGE/cas-connection-ai.jpg);
- background-size: cover;
-    background-repeat: no-repeat;
-    object-fit: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: cover;
   color: aqua;
   transition: all 0.6s;
- }
+}
 
- .one:hover, .two:hover {
+.one:hover, .two:hover {
   width: 230px;
   height: 165px;
- }
+  border-radius: 0;
+}
+
+img {
+  width: 300px;
+}
  
- @media(max-width: 768px){
-  
+@media(max-width: 768px){
   .Holdings {
    width: 70%;
    height: 70%;
@@ -114,8 +119,7 @@ border-radius: 8% 92% 75% 25% / 22% 37% 63% 78%;
    font-weight: bold;
    color: white;
   }
-  
- }
+}
 
 
 </style>
