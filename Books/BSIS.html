@@ -331,68 +331,84 @@ document.getElementById('searchInput').addEventListener('keyup', searchBooks);
 
 function generatePDF() {
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+    const doc = new jsPDF('landscape'); // Set orientation to landscape
 
-    doc.setFontSize(14);
-    doc.text("BSIS Books Data", 105, 10, null, null, 'center'); // Title sa gitna
-    doc.setFontSize(12);
-    doc.text("Total Volume: " + totalVolume, 105, 16, null, null, 'center'); // Total volume sa gitna
+    doc.setFontSize(18);
+    doc.text("BSIS Books Data", 105, 10, null, null, 'center'); 
+    doc.setFontSize(18);
+    doc.text("Total Volume: " + totalVolume, 105, 16, null, null, 'center'); 
 
     const rows = [];
     let currentYear = null;
+    let currentSubject = null;
 
     const tableBody = document.getElementById('bsisTableBody');
     tableBody.querySelectorAll('tr').forEach(row => {
         const columns = row.querySelectorAll('td');
 
+        // Check for Year or Subject
         if (columns.length === 1 && columns[0].colSpan === 9) {
             const textContent = columns[0].textContent;
 
             if (textContent.includes("Year:")) {
                 currentYear = textContent.split("Year: ")[1]; 
-                rows.push([{ content: `Year: ${currentYear}`, colSpan: 9, styles: { halign: 'center', fontStyle: 'bold', fillColor: [0, 0, 0], textColor: [0, 255, 255] } }]);
+                rows.push([{ content: `Year: ${currentYear}`, colSpan: 9, styles: { halign: 'center', fontStyle: 'bold', fillColor: [0, 51, 102], textColor: [255, 255, 255] } }]);
             } else if (textContent.includes("Subject:")) {
                 const subject = textContent.split("Subject: ")[1]; 
-                rows.push([{ content: `Subject: ${subject}`, colSpan: 9, styles: { halign: 'left', fontStyle: 'bold', fillColor: [0, 0, 0], textColor: [0, 255, 255] } }]);
+                currentSubject = subject;
+                rows.push([{ content: `Subject: ${subject}`, colSpan: 9, styles: { halign: 'left', fontStyle: 'bold', fillColor: [0, 51, 102], textColor: [255, 255, 255] } }]);
+
+                // Add headers under each subject
+                const headers = [
+                    "Call Number",
+                    "Book Name",
+                    "Year",
+                    "Author",
+                    "Place of Publication",
+                    "Type",
+                    "Volume",
+                    "Location"
+                ];
+                rows.push(headers); // Add headers under the subject
             }
         } else if (columns.length > 0) {
+            // Collect book details
             const rowData = Array.from(columns).map((column, index) => {
                 const content = column.innerText;
 
-                // Check if this row is overdue
-                const recencyYear = parseInt(columns[2].innerText); // Assuming the year is in the 3rd column
+                const recencyYear = parseInt(columns[2].innerText); 
                 const isOverdueRow = isOverdue(new Date(recencyYear, 0, 1));
 
                 if (isOverdueRow) {
                     return {
                         content: content,
-                        styles: { lineColor: [255, 0, 0], lineWidth: 0.5 } // Red border for overdue books
+                        styles: { lineColor: [255, 0, 0], lineWidth: 0.5 } 
                     };
                 } else {
-                    return content; // Normal content for non-overdue books
+                    return content; 
                 }
             });
             rows.push(rowData);
         }
     });
 
-    const headers = [
-        "Call Number",
-        "Book Name",
-        "Year",
-        "Author",
-        "Place of Publication",
-        "Type",
-        "Volume",
-        "Location"
-    ];
-
     doc.autoTable({
-        head: [headers],
         body: rows,
         startY: 30,
         theme: 'grid',
-        styles: { fontSize: 8 },
+        styles: { fontSize: 12 },
+        headerStyles: {
+            fillColor: [0, 51, 102], // Dark blue background for header
+            textColor: [255, 255, 255], // White text for header
+            fontStyle: 'bold'
+        },
+        bodyStyles: {
+            fillColor: [242, 242, 242], // Light gray background for book details
+            textColor: [51, 51, 51], // Dark gray text for book details
+        },
+        alternateRowStyles: {
+            fillColor: [224, 248, 255], // Light cyan for alternating rows
+        },
         margin: { top: 20, bottom: 20 }, // Adjust margins if necessary
         pageBreak: 'auto', // Automatically add a page break if needed
     });
@@ -400,6 +416,8 @@ function generatePDF() {
     doc.save('library_books_data.pdf');
 }
 document.getElementById('generatePDF').addEventListener('click', generatePDF);
+
+
 </script>
 </body>
 </html>
