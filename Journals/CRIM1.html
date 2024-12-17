@@ -328,15 +328,18 @@ document.getElementById('searchInput').addEventListener('keyup', searchBooks);
 
 function generatePDF() {
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+    const doc = new jsPDF('landscape');
+    const pageWidth = doc.internal.pageSize.width;
 
-    doc.setFontSize(14);
-    doc.text("Criminology Books Data", 105, 10, null, null, 'center'); // Title sa gitna
-    doc.setFontSize(12);
-    doc.text("Total Volume: " + totalVolume, 105, 16, null, null, 'center'); // Total volume sa gitna
+    doc.setFontSize(20);
+    doc.text("CRIMINOLOGY Journal Data", pageWidth / 2, 10, null, null, 'center');
 
+    doc.setFontSize(18);
+    doc.text("Total Volume: " + totalVolume, pageWidth / 2, 16, null, null, 'center');
+    
     const rows = [];
     let currentYear = null;
+    let currentSubject = null;
 
     const tableBody = document.getElementById('bsisTableBody');
     tableBody.querySelectorAll('tr').forEach(row => {
@@ -347,58 +350,62 @@ function generatePDF() {
 
             if (textContent.includes("Year:")) {
                 currentYear = textContent.split("Year: ")[1]; 
-                rows.push([{ content: `Year: ${currentYear}`, colSpan: 9, styles: { halign: 'center', fontStyle: 'bold', fillColor: [0, 0, 0], textColor: [0, 255, 255] } }]);
+                rows.push([{ content: `Year: ${currentYear}`, colSpan: 8, styles: { halign: 'center', fontStyle: 'bold', fillColor: [101, 67, 33], textColor: [255, 255, 255] } }]);
             } else if (textContent.includes("Subject:")) {
                 const subject = textContent.split("Subject: ")[1]; 
-                rows.push([{ content: `Subject: ${subject}`, colSpan: 9, styles: { halign: 'left', fontStyle: 'bold', fillColor: [0, 0, 0], textColor: [0, 255, 255] } }]);
+                currentSubject = subject;
+                rows.push([{ content: `Subject: ${subject}`, colSpan: 8, styles: { halign: 'left', fontStyle: 'bold', fillColor: [101, 67, 33], textColor: [255, 255, 255] } }]);
+
+                const headers = [
+                    "Call Number",
+                    "Book Name",
+                    "Year",
+                    "Author",
+                    "Place of Publication",
+                    "Type",
+                    "Volume",
+                    "Location"
+                ];
+                rows.push(headers.map(header => ({ 
+                    content: header, 
+                    styles: { fontStyle: 'bold', fillColor: [250, 235, 215], textColor: [101, 67, 33], halign: 'center' } 
+                })));
             }
         } else if (columns.length > 0) {
+
             const rowData = Array.from(columns).map((column, index) => {
                 const content = column.innerText;
-
-                // Check if this row is overdue
-                const recencyYear = parseInt(columns[2].innerText); // Assuming the year is in the 3rd column
+                const recencyYear = parseInt(columns[2].innerText); 
                 const isOverdueRow = isOverdue(new Date(recencyYear, 0, 1));
 
                 if (isOverdueRow) {
                     return {
                         content: content,
-                        styles: { lineColor: [255, 0, 0], lineWidth: 0.5 } // Red border for overdue books
+                        styles: { lineColor: [255, 0, 0], lineWidth: 0.5 } 
                     };
                 } else {
-                    return content; // Normal content for non-overdue books
+                    return content; 
                 }
             });
             rows.push(rowData);
         }
     });
 
-    const headers = [
-        "Call Number",
-        "Book Name",
-        "Year",
-        "Author",
-        "Place of Publication",
-        "Type",
-        "Volume",
-        "Location"
-    ];
-
     doc.autoTable({
-        head: [headers],
         body: rows,
         startY: 30,
         theme: 'grid',
-        styles: { fontSize: 8 },
-        margin: { top: 20, bottom: 20 }, // Adjust margins if necessary
-        pageBreak: 'auto', // Automatically add a page break if needed
+        styles: { fontSize: 12 },
+        bodyStyles: {
+            fillColor: [255, 255, 255], 
+            textColor: [51, 51, 51], 
+        },
+        margin: { top: 20, bottom: 20 }, 
+        pageBreak: 'auto', 
     });
 
     doc.save('library_books_data.pdf');
 }
-
-
-
 document.getElementById('generatePDF').addEventListener('click', generatePDF);
 </script>
 </body>
