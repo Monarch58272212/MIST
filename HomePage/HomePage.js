@@ -14,7 +14,7 @@ prevDom.onclick = function(){
 
 let timeRunning = 3000;
 let runTimeOut;
-let timeAutoNext = 15000;
+let timeAutoNext = 10000;
 let runAutoRun = setTimeout(() => {
     nextDom.click();
 }, timeAutoNext);
